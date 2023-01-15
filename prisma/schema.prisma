@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  firstName String? @default("")
+  lastName  String? @default("")
+  userName  String  @unique
+  avatar    String? @default("")
+  pass      String
+  groups    Int[]   @default([])
+}
+
+model Task {
+  id          Int     @id @default(autoincrement())
+  author_id   Int
+  title       String
+  description String? @default("")
+  status      Int
+}
+
+model Purchase {
+  id        Int    @id @default(autoincrement())
+  author_id Int
+  title     String
+  status    Int
+}
+
+model Notification {
+  id               Int @id @default(autoincrement())
+  status           Int @default(0)
+  notification_key Int
+  receiver         Int
+  target_id        Int
+}
+
+model Groups {
+  id           Int   @id @default(autoincrement())
+  wait_confirm Int[]
+  members      Int[]
+}

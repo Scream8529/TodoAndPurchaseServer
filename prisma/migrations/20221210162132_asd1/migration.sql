@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "groups" SET DEFAULT ARRAY[]::INTEGER[];
